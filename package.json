@@ -1,0 +1,11 @@
+{
+	"scripts": {
+		"start": "node src/index.js"
+	},
+	"type": "module",
+	"dependencies": {
+		"bancho.js": "^0.10.1",
+		"node-fetch": "^3.2.10",
+		"tmi.js": "^1.8.5"
+	}
+}
