@@ -1,8 +1,8 @@
 {
-	"name": "PurpleCurcle",
+	"name": "CirclePurple",
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:16",
 	// Install pnpm
-    "onCreateCommand": "curl -fsSL https://get.pnpm.io/install.sh | SHELL=bash bash -",
+	"onCreateCommand": "curl -fsSL https://get.pnpm.io/install.sh | SHELL=bash bash -",
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "pnpm install",
 	// Configure tool-specific properties.
