@@ -24,7 +24,7 @@ export default {
             let is_cooldown = false
             let current_time = Math.floor(new Date().getTime() / 1000)
             let next_request = (user_cooldown != undefined ? user_cooldown : current_time) + settings.osuirc_cooldown
-            current_time < next_request ? is_cooldown = true : is_cooldown = false
+            if (current_time < next_request) is_cooldown = true
             user_cooldown = current_time
 
             for (let pattern in osu_beatmap_patterns) {
