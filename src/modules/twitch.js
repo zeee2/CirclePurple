@@ -24,9 +24,7 @@ export default {
             let is_cooldown = false
             let current_time = Math.floor(new Date().getTime() / 1000)
             let next_request = (user_cooldown != undefined ? user_cooldown : current_time) + settings.osuirc_cooldown
-            if (current_time < next_request) {
-                is_cooldown = true
-            }
+            current_time < next_request ? is_cooldown = true : is_cooldown = false
             user_cooldown = current_time
 
             for (let pattern in osu_beatmap_patterns) {
@@ -36,13 +34,13 @@ export default {
                         const beatmap = await osuv2.get_beatmap_info(matches[matches.length - 1])
                         if (!beatmap) return
                         twitch_client.say(channel, `[${beatmap.status}] ${beatmap.artist} - ${beatmap.title} [${beatmap.version}] | ${beatmap.bpm}BPM ${beatmap.difficulty_rating}★ `)
-                        is_cooldown == false ? await osuirc.send(osuirc_client, settings.channels[channel.replace("#", "")], `[${beatmap.status}] [https://osu.ppy.sh/b/${beatmap.id} ${beatmap.artist} - ${beatmap.title} [${beatmap.version}]] | ${beatmap.bpm}BPM ${beatmap.difficulty_rating}★ | [https://api.nerinyan.moe/d/${beatmap.id} NeriNyan]`) : null
+                        is_cooldown ? null : await osuirc.send(osuirc_client, settings.channels[channel.replace("#", "")], `[${beatmap.status}] [https://osu.ppy.sh/b/${beatmap.id} ${beatmap.artist} - ${beatmap.title} [${beatmap.version}]] | ${beatmap.bpm}BPM ${beatmap.difficulty_rating}★ | [https://api.nerinyan.moe/d/${beatmap.id} NeriNyan]`)
                         break
                     } else {
                         const beatmapsets = await osuv2.get_beatmapsets_info(matches[matches.length - 1])
                         if (!beatmapsets) return
                         twitch_client.say(channel, `[${beatmapsets.status}] ${beatmapsets.artist} - ${beatmapsets.title} | mapped by ${beatmapsets.creator} | ${beatmapsets.beatmaps} beatmap(s)`)
-                        is_cooldown == false ? await osuirc.send(osuirc_client, settings.channels[channel.replace("#", "")], `[${beatmapsets.status}] [https://osu.ppy.sh/s/${beatmapsets.id} ${beatmapsets.artist} - ${beatmapsets.title}] | mapped by ${beatmapsets.creator} | ${beatmapsets.beatmaps} beatmap(s) | [https://api.nerinyan.moe/d/${beatmapsets.id} NeriNyan]`) : null
+                        is_cooldown ? null : await osuirc.send(osuirc_client, settings.channels[channel.replace("#", "")], `[${beatmapsets.status}] [https://osu.ppy.sh/s/${beatmapsets.id} ${beatmapsets.artist} - ${beatmapsets.title}] | mapped by ${beatmapsets.creator} | ${beatmapsets.beatmaps} beatmap(s) | [https://api.nerinyan.moe/d/${beatmapsets.id} NeriNyan]`)
                         break
                     }
                 }
